@@ -10,9 +10,18 @@ import UIKit
 
 class WelcomeToMyAppVC: UIViewController {
 
+    @IBOutlet weak var lblPassword: UILabel!
+    @IBOutlet weak var lblEmail: UILabel!
+    
+    var email:String?
+    var password:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        lblEmail.text = email
+        lblPassword.text = password
+        
+        
         // Do any additional setup after loading the view.
     }
 
@@ -20,6 +29,13 @@ class WelcomeToMyAppVC: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func clickBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
     
 
     /*

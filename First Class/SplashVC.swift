@@ -9,27 +9,33 @@
 import UIKit
 
 class SplashVC: UIViewController {
-
+    @IBOutlet weak var imgSplash: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        imgSplash.alpha = 1
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        imgSplash.transform = CGAffineTransform(scaleX: 1, y: 1)
+        self.imgSplash.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
+        
+        UIView.animate(withDuration: 2, animations: {
+            self.imgSplash.transform = CGAffineTransform(translationX: 0, y: 0)
+        }, completion:{finished in
+            
+            let storyboard = UIStoryboard(name: "Home", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "HomeID") as! HomeVC
+            
+            let transition = CATransition()
+            transition.duration = 1.35
+            transition.type = kCATransitionReveal
+            transition.subtype = kCATransitionFromRight
+            self.view.window?.layer.add(transition, forKey: nil)
+            self.present(vc, animated: false, completion: nil)
+        })
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        
     }
-    */
 
 }
