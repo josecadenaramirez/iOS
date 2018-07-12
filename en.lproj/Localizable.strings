@@ -1,0 +1,9 @@
+/* 
+  Strings.strings
+  First Class
+
+  Created by José Cadena on 10/07/18.
+  Copyright © 2018 José Cadena. All rights reserved.
+*/
+
+"HelloWorld" = "Hello World";
