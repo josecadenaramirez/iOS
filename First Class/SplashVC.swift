@@ -22,8 +22,8 @@ class SplashVC: UIViewController {
             self.imgSplash.transform = CGAffineTransform(translationX: 0, y: 0)
         }, completion:{finished in
             
-            let storyboard = UIStoryboard(name: "Home", bundle: nil)
-            let vc = storyboard.instantiateViewController(withIdentifier: "HomeID") as! HomeVC
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = storyboard.instantiateViewController(withIdentifier: "LoginID") as! LoginVC
             
             let transition = CATransition()
             transition.duration = 1.35

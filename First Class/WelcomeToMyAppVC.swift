@@ -13,11 +13,18 @@ class WelcomeToMyAppVC: UIViewController {
     @IBOutlet weak var lblPassword: UILabel!
     @IBOutlet weak var lblEmail: UILabel!
     
-    var email:String?
-    var password:String?
+    let usr = User()
+    var email = ""
+    var password = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        usr.reloadData()
+        
+        email = usr.email
+        password = usr.password
+        
         lblEmail.text = email
         lblPassword.text = password
         

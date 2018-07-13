@@ -10,6 +10,7 @@ import UIKit
 
 class firstClassCell: UITableViewCell {
 
+    @IBOutlet weak var btnAny: UIButton!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var lblDescription: UILabel!
     @IBOutlet weak var lblName: UILabel!

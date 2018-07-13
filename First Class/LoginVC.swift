@@ -16,6 +16,7 @@ class LoginVC: UIViewController {
     @IBOutlet weak var edtPassword: UITextField!
     @IBOutlet weak var edtEmail: UITextField!
     
+    let usr = User()
     var alert = UIAlertController()
     var email = ""
     var password = ""
@@ -24,6 +25,9 @@ class LoginVC: UIViewController {
         super.viewDidLoad()
         loadingIndicator.isHidden = true
         vwBlockUser.isHidden = true
+        
+        let tap2: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        view.addGestureRecognizer(tap2)
     }
     
     override func didReceiveMemoryWarning() {
@@ -31,41 +35,23 @@ class LoginVC: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
+    
     func createUser(){
         email = edtEmail.text!
         password = edtPassword.text!
         print(String(NSLocalizedString("NewUser", comment: "")) + email)
+        usr.saveEmailPassword(email: email, pass: password)
     }
     
     
     @IBAction func clickSignUp(_ sender: Any) {
         createUser()
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: "WelcomeToMyAppID") as! WelcomeToMyAppVC
-        if email.count < 5{
-            alert = showAlertOk(title: "MIAPP", message: "verifica tu contraseña")
-        }
-        present(alert, animated: true, completion: nil)
+        
+        let storyBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyBoard.instantiateViewController(withIdentifier: "WelcomeToMyAppID") as! WelcomeToMyAppVC
+        self.present(vc, animated: true, completion: nil)
     }
-    
-    func showAlertOk(title:String, message:String)->UIAlertController{
-        let alertController = UIAlertController.init(title: title, message: message, preferredStyle: .alert )
-        let okAction = UIAlertAction.init(title: "Ok", style: .default, handler: nil)
-        alertController.addAction(okAction)
-        let okAction2 = UIAlertAction.init(title: "Ok2", style: .destructive, handler: nil)
-        alertController.addAction(okAction2)
-        let okAction3 = UIAlertAction.init(title: "O3", style: .cancel, handler: nil)
-        alertController.view.tintColor = .green
-        
-        
-        
-        let alertac = UIAlertAction.init(title: "", style: .destructive){
-            UIAlertAction in self.createUser()
-        }
-        
-        okAction.setValue(#colorLiteral(red: 0.5725490451, green: 0, blue: 0.2313725501, alpha: 1), forKey: "titleTextColor")
-        alertController.addAction(okAction3)
-        return alertController
-    }
-    
 }
